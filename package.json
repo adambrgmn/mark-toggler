@@ -1,14 +1,17 @@
 {
   "name": "mark-toggler",
   "version": "0.0.1",
-  "description": "Chrome extension to zap through the bookmarks of a bookmark-folder",
+  "description":
+    "Chrome extension to zap through the bookmarks of a bookmark-folder",
   "repository": "git@github.com:adambrgmn/mark-toggler.git",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development webpack --mode development --watch",
-    "build": "NODE_ENV=production webpack --mode production"
+    "build": "NODE_ENV=production webpack --mode production",
+    "flow": "flow",
+    "lint": "eslint src"
   },
   "dependencies": {
     "react": "^16.3.2",
@@ -29,16 +32,32 @@
     "@babel/preset-flow": "7.0.0-beta.46",
     "@babel/preset-react": "7.0.0-beta.46",
     "@babel/runtime": "7.0.0-beta.46",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta",
     "babel-plugin-transform-dynamic-import": "^2.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
     "file-loader": "^1.1.11",
+    "flow-bin": "^0.72.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.0.0-rc.6",
+    "lint-staged": "^7.1.0",
     "thread-loader": "^1.1.5",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
