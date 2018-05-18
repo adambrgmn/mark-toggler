@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import * as Styles from './styles'; // eslint-disable-line
 
 type Props = {
   folders: Array<chrome$BookmarkTreeNode>,
@@ -8,8 +9,8 @@ type Props = {
 
 function FolderPicker({ folders, onClick }: Props) {
   return (
-    <div>
-      <h1>Pick a folder</h1>
+    <Styles.Container>
+      <Styles.Title>Pick a folder</Styles.Title>
       <ul>
         {folders.map(folder => (
           <li key={folder.id}>
@@ -17,7 +18,7 @@ function FolderPicker({ folders, onClick }: Props) {
           </li>
         ))}
       </ul>
-    </div>
+    </Styles.Container>
   );
 }
 

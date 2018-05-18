@@ -1,9 +1,11 @@
 // @flow
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { injectGlobal } from 'styled-components';
+import { normalize } from 'polished';
 import { getBookmarks } from './api/chrome';
 import { traverseBookmarks } from './utils';
-import { FolderPicker } from './Pages/FolderPicker';
+import { FolderPicker } from './pages/FolderPicker';
 
 type Props = {};
 
@@ -17,10 +19,10 @@ class App extends Component<Props, State> {
   };
 
   async componentDidMount() {
-    this.traverseBookmarks();
+    this.findBookmarkFolders();
   }
 
-  traverseBookmarks = async () => {
+  findBookmarkFolders = async () => {
     const bookmarks = await getBookmarks();
     const folders = await traverseBookmarks(bookmarks[0].children);
 
@@ -42,6 +44,8 @@ class App extends Component<Props, State> {
     );
   }
 }
+
+injectGlobal`${normalize()}`; // eslint-disable-line
 
 const root = document.getElementById('root');
 if (root) ReactDOM.render(<App />, root);
