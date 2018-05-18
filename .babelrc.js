@@ -47,5 +47,9 @@ module.exports = {
     ],
     require.resolve('@babel/plugin-syntax-dynamic-import'),
     isEnvTest && require.resolve('babel-plugin-transform-dynamic-import'),
+    [
+      require.resolve('babel-plugin-styled-components'),
+      { preprocess: true, displayName: !isEnvProduction },
+    ],
   ].filter(Boolean),
 };

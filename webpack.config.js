@@ -9,7 +9,7 @@ module.exports = (_, { mode }) => {
   const isProd = mode === 'production';
 
   return {
-    devtool: isProd ? false : 'cheap-module-source-map',
+    devtool: isProd ? false : 'eval',
     entry: {
       popup: './src/popup.js',
     },
@@ -22,6 +22,7 @@ module.exports = (_, { mode }) => {
       modules: ['node_modules'],
       extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     },
+    target: 'web',
     module: {
       strictExportPresence: true,
       rules: [
@@ -112,6 +113,9 @@ module.exports = (_, { mode }) => {
                 description: pkg.description,
                 homepage_url: pkg.homepage,
                 ...data,
+                content_security_policy: !isProd
+                  ? "script-src 'self' 'unsafe-eval'; object-src 'self'"
+                  : undefined,
               },
               null,
               2,
