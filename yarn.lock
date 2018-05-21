@@ -1809,6 +1809,10 @@ babylon@^7.0.0-beta.30:
   version "7.0.0-beta.47"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-7.0.0-beta.47.tgz#6d1fa44f0abec41ab7c780481e62fd9aafbdea80"
 
+balance-text@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/balance-text/-/balance-text-3.2.0.tgz#e99799feed8b2ff9f078c295f28a776fd311d019"
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
