@@ -1,25 +1,35 @@
 // @flow
 import React from 'react';
 import * as Styles from './styles'; // eslint-disable-line
+import { SectionContainer } from '../../components/Container';
 
 type Props = {
+  active: boolean,
   folders: Array<chrome$BookmarkTreeNode>,
   onClick: chrome$BookmarkTreeNode => void | Promise<void>,
 };
 
-function FolderPicker({ folders, onClick }: Props) {
+function FolderPicker({ active, folders, onClick }: Props) {
   return (
-    <Styles.Container>
-      <Styles.Title>Pick a folder</Styles.Title>
-      <ul>
+    <SectionContainer active={active}>
+      <Styles.Header>
+        <Styles.Title>Pick a folder</Styles.Title>
+        <Styles.Description>
+          Choose a folder to start flickering through
+        </Styles.Description>
+      </Styles.Header>
+
+      <Styles.FolderList>
         {folders.map(folder => (
-          <li key={folder.id}>
-            <button onClick={() => onClick(folder)}>{folder.title}</button>
-          </li>
+          <Styles.FolderListItem key={folder.id}>
+            <Styles.FolderButton onClick={() => onClick(folder)}>
+              {folder.title}
+            </Styles.FolderButton>
+          </Styles.FolderListItem>
         ))}
-      </ul>
-    </Styles.Container>
+      </Styles.FolderList>
+    </SectionContainer>
   );
 }
 
-export { FolderPicker };
+export { FolderPicker as default };

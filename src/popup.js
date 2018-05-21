@@ -1,51 +1,59 @@
 // @flow
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { injectGlobal } from 'styled-components';
-import { normalize } from 'polished';
+import { globalStyles } from './styles';
 import { getBookmarks } from './api/chrome';
 import { traverseBookmarks } from './utils';
-import { FolderPicker } from './pages/FolderPicker';
+import { AppContainer } from './components/Container';
+import Loader from './pages/Loader';
+import FolderPicker from './pages/FolderPicker';
 
 type Props = {};
 
 type State = {
+  state: 'initial' | 'pick' | 'toggle',
   folders: Array<chrome$BookmarkTreeNode>,
 };
 
 class App extends Component<Props, State> {
   state = {
+    state: 'initial',
     folders: [],
   };
 
   async componentDidMount() {
-    this.findBookmarkFolders();
+    setTimeout(() => this.findBookmarkFolders(), 500);
   }
 
   findBookmarkFolders = async () => {
     const bookmarks = await getBookmarks();
     const folders = await traverseBookmarks(bookmarks[0].children);
 
-    this.setState(() => ({ folders }));
+    this.setState(() => ({ folders, state: 'pick' }));
   };
 
   activateFolder = ({ id }: chrome$BookmarkTreeNode) => {
     console.log(id); // eslint-disable-line
+    this.setState(() => ({ state: 'initial' }));
   };
 
   render() {
+    const { state } = this.state;
     return (
-      <div>
+      <AppContainer>
+        <Loader active={state === 'initial'} />
         <FolderPicker
+          active={state === 'pick'}
           folders={this.state.folders}
           onClick={this.activateFolder}
         />
-      </div>
+      </AppContainer>
     );
   }
 }
 
-injectGlobal`${normalize()}`; // eslint-disable-line
-
 const root = document.getElementById('root');
-if (root) ReactDOM.render(<App />, root);
+if (root) {
+  globalStyles();
+  ReactDOM.render(<App />, root);
+}
