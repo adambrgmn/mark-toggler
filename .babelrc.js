@@ -49,7 +49,7 @@ module.exports = {
     isEnvTest && require.resolve('babel-plugin-transform-dynamic-import'),
     [
       require.resolve('babel-plugin-styled-components'),
-      { preprocess: true, displayName: !isEnvProduction },
+      { displayName: !isEnvProduction },
     ],
   ].filter(Boolean),
 };
